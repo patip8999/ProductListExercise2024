@@ -1,0 +1,15 @@
+<button class="btn-outline-primary" [routerLink]="''">Back to home</button>
+<div class="container-fluid mt-5 d-flex justify-content-center">
+    <div class="row row-cols-1 row-cols-md-6 g-5">
+        <div class="card" style="width: 18rem;">
+            @if (products$ | async; as product) {
+                <img class="card-img-top" src={{product?.image}} alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">{{product?.title}}</h5>
+                    <p class="card-text">{{ product?.description }}</p>
+                    <p class="card-text"><strong>Price</strong> {{product?.price }}$</p>
+                </div>
+            }
+        </div>
+    </div>
+</div>

@@ -18,7 +18,7 @@ export const routes: Routes = [
         component: ProductDetailComponent
     },
     {
-        path: 'category/:id',
+        path: 'category/:category',
         component: CategoriesComponent
     },
 

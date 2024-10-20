@@ -1,0 +1,111 @@
+<div class="container my-5">
+    <form #loginForm="ngForm" (ngSubmit)="OnFormSubmitted(loginForm)" class="p-4 border rounded shadow">
+      <h2 class="mb-4 text-center">Login Form</h2>
+  
+      <div class="mb-4">
+        <label for="email" class="form-label">Email</label>
+        <input
+          type="email"
+          class="form-control"
+          name="email"
+          [(ngModel)]="model().email"
+          #emailInput="ngModel"
+          required
+          email
+          id="email"
+        />
+        @if (emailInput.invalid && emailInput.touched) {
+          <div class="text-danger mt-2">
+            @if (emailInput.errors) {
+              @if (emailInput.errors['required']) {
+                <p>Email is required.</p>
+              }
+              @if (emailInput.errors['email']) {
+                <p>Please enter a valid email address.</p>
+              }
+            }
+          </div>
+        }
+      </div>
+      <div class="mb-4">
+        <label for="username" class="form-label">Username</label>
+        <input
+          type="text"
+          class="form-control"
+          name="username"
+          [(ngModel)]="model().username"
+          #usernameInput="ngModel"
+          required
+          pattern="^[a-z][a-z0-9]*$"
+          id="username"
+        />
+        @if (usernameInput.invalid && usernameInput.touched) {
+          <div class="text-danger mt-2">
+            @if (usernameInput.errors) {
+              @if (usernameInput.errors['required']) {
+                <p>Username is required.</p>
+              }
+              @if (usernameInput.errors['pattern']) {
+                <p>Username can only contain lowercase letters and digits, and must start with a letter.</p>
+              }
+            }
+          </div>
+        }
+      </div>
+      <div class="mb-4">
+        <label for="password" class="form-label">Password</label>
+        <input
+          type="password"
+          class="form-control"
+          name="password"
+          [(ngModel)]="model().password"
+          #passwordInput="ngModel"
+          required
+          pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()]).{6,}$"
+          id="password"
+        />
+        @if (passwordInput.invalid && passwordInput.touched) {
+          <div class="text-danger mt-2">
+            @if (passwordInput.errors) {
+              @if (passwordInput.errors['required']) {
+                <p>Password is required.</p>
+              }
+              @if (passwordInput.errors['pattern']) {
+                <p>Password must contain at least one lowercase letter, one uppercase letter, one digit, one special character, and must be at least 6 characters long.</p>
+              }
+            }
+          </div>
+        }
+      </div>
+      <div class="mb-4">
+        <label for="userRole" class="form-label">User Role</label>
+        <div class="form-control" style="height: auto; cursor: default; padding: 10px;">
+          @for(role of roles; track role) {
+            <div 
+              (click)="toggleRole(role)" 
+              [ngClass]="{'text-primary': model().roles.includes(role)}"
+              style="padding: 8px; cursor: pointer;"
+            >
+              {{ role }}
+            </div>
+          }
+        </div>
+      </div>
+  
+      @if (model().roles.length === 0) {
+        <div class="text-danger mb-3">
+          <p>At least one role must be selected.</p>
+        </div>
+      }
+      <div class="mt-3">
+        <button
+          type="submit"
+          [disabled]="loginForm.invalid || model().roles.length === 0 "
+          class="btn btn-primary "
+        >
+          Send
+        </button>
+      </div>
+    </form>
+    <p class="mt-5 text-left"><strong>{{ message() }}</strong></p>
+</div>

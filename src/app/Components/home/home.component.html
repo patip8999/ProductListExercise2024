@@ -1,0 +1,187 @@
+<nav class="navbar navbar-expand-lg bg-body-tertiary bg-info-subtle">
+    <div class="container-fluid d-flex align-items-center">
+   
+      <button class="me-1 btn-outline-primary"
+      (click)="sort('asc')"
+      [ngClass]="{
+        'btn': true, 
+        'btn-primary': sortOrder() === 'asc',
+        'btn-outline-primary': sortOrder() === 'desc'}" 
+       >ASC</button> 
+       <button class="me-1 btn-outline-primary"
+      (click)="sort('desc')"
+      [ngClass]="{
+        'btn': true, 
+        'btn-primary': sortOrder() === 'desc',
+        'btn-outline-primary': sortOrder() === 'asc'}" 
+       >Desc</button>
+       
+       <button
+       class="me-1"
+       (click)="toggle()"
+       [ngClass]="{
+        'btn': true,
+        'btn-success': isPriceVisible(),
+        'btn-outline-success' : !isPriceVisible()
+       }" >Show Price</button>
+       
+  
+  
+  
+      <div class="ms-auto d-flex dropdown">
+        <div class="btn-group me-2">
+          @for (category of categoriesSignal(); track category; let i = $index) {
+           
+            <button
+              type="button"
+              class="btn"
+              style="background-color: {{ buttonColorr[i] }}; color: white; margin-right: 10px;">
+              <div [routerLink]="['/category', category]">{{ category }}</div>
+            </button>
+          }
+        </div>
+      </div>
+    </div>
+  </nav>
+  <div class="input-group mb-3"></div>
+    <div class="form-floating flex-grow-1">
+      <input type="text" class="form-control" id="floatingInputGroup1" [(ngModel)]="filterText" placeholder="title">
+      <label for="floatingInputGroup1">Search...</label>
+    </div>
+  
+  @if (isLoading()){
+    <p>Loading...</p>
+  }
+  @else {
+  <div class="container-fluid text-center mt-5">
+    <div class="row row-cols-1 row-cols-md-6 g-5" >
+      @for (item of FilteredAndSortedProducts(); track item) {
+      <div class="col">
+        <div class="card rounded " style="width: 18rem">
+          <div class="card-img-top" style="height: 150px">
+            <img
+              src="{{ item.image }}"
+              class="card-img-top"
+              alt="..."
+              style="max-height: 100%; max-width: 100%; object-fit: contain"
+            />
+          </div>
+  
+          <div class="card-body d-flex flex-column ">
+            <h5 class="card-title  " style="flex-grow: 1"[routerLink]="['/product', item.id]">{{ item.title }}</h5>
+          </div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">{{ item.category }}</li>
+            @if (isPriceVisible()) {
+            <li class="list-group-item">${{ item.price }}</li>
+            }
+          </ul>
+          <div
+            class="card-body d-flex justify-content-between align-items-center"
+          >
+          <button
+    class="me-1"
+    data-bs-toggle="modal" 
+    data-bs-target="#exampleModal"
+    (click)="toggle2(item.id, item)"
+    [ngClass]="{
+      'btn': true,
+      'btn-outline-danger': VisibleProductId() === item.id,
+      'btn-info': VisibleProductId() !== item.id
+    }">
+    Show Details
+  </button>
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Product Details</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <!-- Dynamic product details -->
+          @if (selectedProduct) {
+            <img
+            src="{{ item.image }}"
+            class="card-img-top"
+            alt="..."
+            style="max-height: 100%; max-width: 100%; object-fit: contain"
+          />
+            <p><strong>Product Title:</strong> {{ selectedProduct.title }}</p>
+            <p><strong>Price:</strong> {{ selectedProduct.price }}$</p>
+            <p><strong>Description:</strong> {{ selectedProduct.description }}</p>
+          }
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+      
+        <div class="col-4">
+          @if (isDetail()) {
+            <div class="border p-3">
+              @for (product of FilteredAndSortedProducts(); track product) {
+                @if (VisibleProductId() === product.id) {
+                  <p>{{ item.title }} {{ item.description }}</p>
+                  <p>{{ item.price }}</p>
+                  <button
+                    class="me-1"
+                    (click)="toggle2(item.id,item)"
+                    [ngClass]="{
+                      'btn': true,
+                      'btn-outline-danger': isDetail() && VisibleProductId() === item.id,
+                      'btn-outline-dark': !isDetail() || VisibleProductId() !== item.id
+                    }">
+                  {{ isDetail() && VisibleProductId() === item.id ? 'Hide' : 'Show' }}
+                  </button>
+                }
+              }
+            </div>
+          }
+        </div>
+       
+            <button
+              type="button"
+              class="btn btn-success ms-auto"
+              style="width: 60%  padding: 10px;"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                class="bi bi-cart-plus"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  d="M9 5.5a.5.5 0 0 0-1 0V7H6.5a.5.5 0 0 0 0 1H8v1.5a.5.5 0 0 0 1 0V8h1.5a.5.5 0 0 0 0-1H9z"
+                />
+                <path
+                  d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1zm3.915 10L3.102 4h10.796l-1.313 7zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0m7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0"
+                />
+              </svg>
+              Buy now!
+            </button>
+  
+          </div>
+        </div>
+      </div>
+      }
+  
+    </div>
+  </div>
+  }
+  
