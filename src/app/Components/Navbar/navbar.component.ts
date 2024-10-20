@@ -10,7 +10,7 @@ import { CategoriesService } from "../../Services/categories.service";
     selector: 'app-navbar'
 })
 export class NavbarComponent {
-    categoriesService: CategoriesService = inject(CategoriesService);
-    buttonColorr: string[] = ['#DDA0DD', '#DB7093', '#00BFFF', '#008B8B'];
-    categoriesSignal: Signal<string[]> = toSignal(this.categoriesService.getAll(), { initialValue: []});
+    private readonly categoriesService: CategoriesService = inject(CategoriesService); 
+    public buttonColorr: string[] = ['#DDA0DD', '#DB7093', '#00BFFF', '#008B8B']; 
+    public categoriesSignal: Signal<string[]> = toSignal(this.categoriesService.getAll(), { initialValue: [] }); 
 }

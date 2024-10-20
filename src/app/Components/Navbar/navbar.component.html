@@ -12,7 +12,7 @@
         </li>
       </ul>
 
-      <!-- Środkowanie kategorii -->
+     
       <div class="d-flex justify-content-center w-100">
         <div class="btn-group">
           @for (category of categoriesSignal(); track category; let i = $index) {
@@ -26,10 +26,11 @@
         </div>
       </div>
 
-      <!-- Sekcja przycisku "Register" -->
       <form class="d-flex ms-auto" role="form">
         <button class="btn btn-outline-info" type="submit" [routerLink]="['form']">Register</button>
       </form>
     </div>
   </div>
 </nav>
+
+

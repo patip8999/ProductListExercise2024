@@ -13,8 +13,8 @@ import { AsyncPipe } from "@angular/common";
 
 export class ProductDetailComponent {
     
-    productsService: Productservice = inject(Productservice);
-    products$: Observable<ProductModel> = this.productsService.getOne('id')
+    private readonly productsService: Productservice = inject(Productservice); 
+    public products$: Observable<ProductModel> = this.productsService.getOne('id'); 
    
     @Input( ) set id(value: string) {
         this.products$ = this.productsService.getOne(value)

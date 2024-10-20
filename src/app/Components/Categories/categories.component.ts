@@ -11,12 +11,12 @@ import { AsyncPipe, CommonModule } from "@angular/common";
     imports: [RouterModule, AsyncPipe, RouterOutlet, CommonModule]
 })
 export class CategoriesComponent {
-    categoryName: string = '';
-    productsService: Productservice = inject(Productservice);
-    products$: Observable<ProductModel[]> = of([]);
-    @Input() set category(category: string) {
+  public categoryName: string = ''; 
+  private readonly productsService: Productservice = inject(Productservice); 
+  public products$: Observable<ProductModel[]> = of([]); 
+
+  @Input() set category(category: string) {
       this.categoryName = category;
       this.products$ = this.productsService.getAllInCategory(category);
-    }
-
+  }
 }
