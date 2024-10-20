@@ -14,8 +14,5 @@ export interface CatFactModel {
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
-httpClient: HttpClient = inject(HttpClient);
- data$: Observable<CatFactModel> = this.httpClient.get<CatFactModel>(
-  'https://catfact.ninja/fact'
- )
+
 }
