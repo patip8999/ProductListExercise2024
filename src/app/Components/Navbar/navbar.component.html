@@ -1,32 +1,35 @@
 <nav class="navbar navbar-expand-lg bg-body-tertiary bg-info-subtle">
-    <div class="container-fluid">
-      <a class="navbar-brand" ><strong>Pati shop</strong></a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" [routerLink]="['']">Home</a>
-          </li>
-        
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Categories
-            </a>
-            <ul class="dropdown-menu">
-              @for (category of categoriesSignal(); track category) {
-              <li><a class="dropdown-item"[routerLink]="['/category', category]">{{category}}</a></li>
-             
-              }
-            </ul>
-          </li>
-          
-        </ul>
-        <form class="d-flex" role="form">
-        
-          <button class="btn btn-outline-info" type="submit"[routerLink]="['form']">Register</button>
-        </form>
+  <div class="container-fluid">
+    <a class="navbar-brand"><strong>Pati shop</strong></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" [routerLink]="['']">Home</a>
+        </li>
+      </ul>
+
+      <!-- Środkowanie kategorii -->
+      <div class="d-flex justify-content-center w-100">
+        <div class="btn-group">
+          @for (category of categoriesSignal(); track category; let i = $index) {
+            <button
+              type="button"
+              class="btn"
+              style="background-color: {{ buttonColorr[i] }}; color: white; margin-right: 10px;">
+              <div [routerLink]="['/category', category]">{{ category }}</div>
+            </button>
+          }
+        </div>
       </div>
+
+      <!-- Sekcja przycisku "Register" -->
+      <form class="d-flex ms-auto" role="form">
+        <button class="btn btn-outline-info" type="submit" [routerLink]="['form']">Register</button>
+      </form>
     </div>
-  </nav>
+  </div>
+</nav>

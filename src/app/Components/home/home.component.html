@@ -1,53 +1,34 @@
 <nav class="navbar navbar-expand-lg bg-body-tertiary bg-info-subtle">
-    <div class="container-fluid d-flex align-items-center">
-   
-      <button class="me-1 btn-outline-primary"
-      (click)="sort('asc')"
-      [ngClass]="{
-        'btn': true, 
-        'btn-primary': sortOrder() === 'asc',
-        'btn-outline-primary': sortOrder() === 'desc'}" 
-       >ASC</button> 
-       <button class="me-1 btn-outline-primary"
-      (click)="sort('desc')"
-      [ngClass]="{
-        'btn': true, 
-        'btn-primary': sortOrder() === 'desc',
-        'btn-outline-primary': sortOrder() === 'asc'}" 
-       >Desc</button>
-       
-       <button
-       class="me-1"
-       (click)="toggle()"
-       [ngClass]="{
-        'btn': true,
-        'btn-success': isPriceVisible(),
-        'btn-outline-success' : !isPriceVisible()
-       }" >Show Price</button>
-       
-  
-  
-  
-      <div class="ms-auto d-flex dropdown">
-        <div class="btn-group me-2">
-          @for (category of categoriesSignal(); track category; let i = $index) {
-           
-            <button
-              type="button"
-              class="btn"
-              style="background-color: {{ buttonColorr[i] }}; color: white; margin-right: 10px;">
-              <div [routerLink]="['/category', category]">{{ category }}</div>
-            </button>
-          }
-        </div>
-      </div>
+  <div class="container-fluid d-flex align-items-center justify-content-between">
+
+    <!-- Przyciski sortowania -->
+    <div class="d-flex">
+      <button class="me-1 btn btn-outline-primary"
+        (click)="sort('asc')"
+        [ngClass]="{
+          'btn-primary': sortOrder() === 'asc',
+          'btn-outline-primary': sortOrder() === 'desc'}">ASC</button>
+
+      <button class="me-1 btn btn-outline-primary"
+        (click)="sort('desc')"
+        [ngClass]="{
+          'btn-primary': sortOrder() === 'desc',
+          'btn-outline-primary': sortOrder() === 'asc'}">Desc</button>
+
+      <button class="me-1 btn"
+        (click)="toggle()"
+        [ngClass]="{
+          'btn-success': isPriceVisible(),
+          'btn-outline-success': !isPriceVisible()}">Show Price</button>
     </div>
-  </nav>
-  <div class="input-group mb-3"></div>
-    <div class="form-floating flex-grow-1">
-      <input type="text" class="form-control" id="floatingInputGroup1" [(ngModel)]="filterText" placeholder="title">
-      <label for="floatingInputGroup1">Search...</label>
+
+    <!-- Pole wyszukiwania -->
+    <div class="d-flex flex-grow-1 justify-content-center w-25 p-3">
+      <input type="text" class="form-control form-control-sm rounded" id="floatingInputGroup1" [(ngModel)]="filterText" placeholder="Search">
     </div>
+
+  </div>
+</nav>
   
   @if (isLoading()){
     <p>Loading...</p>
@@ -100,16 +81,16 @@
         </div>
         <div class="modal-body">
           <!-- Dynamic product details -->
-          @if (selectedProduct) {
+          @if (selectedProduct()) {
             <img
-            src="{{ item.image }}"
+            src="{{ selectedProduct()?.image }}"
             class="card-img-top"
             alt="..."
             style="max-height: 100%; max-width: 100%; object-fit: contain"
           />
-            <p><strong>Product Title:</strong> {{ selectedProduct.title }}</p>
-            <p><strong>Price:</strong> {{ selectedProduct.price }}$</p>
-            <p><strong>Description:</strong> {{ selectedProduct.description }}</p>
+          <p><strong>Product Title:</strong> {{ selectedProduct()?.title }}</p>
+          <p><strong>Price:</strong> {{ selectedProduct()?.price }}$</p>
+          <p><strong>Description:</strong> {{ selectedProduct()?.description }}</p>
           }
         </div>
         <div class="modal-footer">

@@ -6,6 +6,7 @@ import { ProductModel } from "../../Models/product.model";
 import { Productservice } from "../../Services/product.service";
 import { CommonModule } from "@angular/common";
 import { FormsModule } from "@angular/forms";
+import { Observable } from "rxjs";
 
 @Component({
     templateUrl: './home.component.html',
@@ -22,7 +23,7 @@ export class HomeComponent {
     productsSignal: Signal<ProductModel[]> = toSignal(this.productService.getAll(), { initialValue: []});
 
     isDetail: WritableSignal<boolean> = signal(false);
-    VisibleProductId: WritableSignal<number> = signal(0);
+    VisibleProductId = signal<number | undefined>(undefined);
     isPriceVisible: WritableSignal<boolean> = signal(false); 
     sortOrder: WritableSignal<string> = signal('asc');
     filterText: WritableSignal<string> = signal('');
@@ -44,7 +45,7 @@ export class HomeComponent {
       });
     });
   
-    selectedProduct: ProductModel | null = null;
+    selectedProduct = signal<ProductModel | undefined>(undefined);
 
     toggle() {
       this.isPriceVisible.update((isVisible) => !isVisible);
@@ -52,7 +53,7 @@ export class HomeComponent {
   
     toggle2(productId: number, product: ProductModel) {
       this.VisibleProductId.set(productId);
-      this.selectedProduct = product;
+      this.selectedProduct.set(product); // Użyj set do przypisania wartości sygnału
     }
 
     sort(sortBy: 'asc' | 'desc') {
