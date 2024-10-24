@@ -42,28 +42,5 @@ export class FormComponent {
         });
     }
 
-    public toggleRole(role: string): void { 
-        const currentRoles = this.model().roles;
-        const updateRoles: string[] = [];
-
-        let roleExist = false;
-        for (const currentRole of currentRoles) {
-            if (currentRole === role) {
-                roleExist = true;
-            } else {
-                updateRoles.push(currentRole);
-            }
-        }
-        
-        if (!roleExist) {
-            updateRoles.push(role);
-        }
-
-        this.model.set({
-            email: this.model().email,
-            username: this.model().username,
-            password: this.model().password,
-            roles: updateRoles,
-        });
-    }
+   
 }
