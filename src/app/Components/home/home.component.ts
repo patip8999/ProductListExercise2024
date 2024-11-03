@@ -16,12 +16,13 @@ import { FormsModule } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { FooterComponent } from '../Footer/footer.component';
 import { ModalComponent } from '../../UI components/Modal/modal.component';
+import { FilterPanelComponent } from '../../UI components/Filter-panel/filter-panel.component';
 
 
 @Component({
   templateUrl: './home.component.html',
   standalone: true,
-  imports: [RouterModule, CommonModule, FormsModule, FooterComponent, ModalComponent],
+  imports: [RouterModule, CommonModule, FormsModule, FooterComponent, ModalComponent, FilterPanelComponent],
 })
 export class HomeComponent {
 
