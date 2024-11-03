@@ -1,4 +1,5 @@
 <div class="container my-5">
+  <ng-content></ng-content>
     <form #loginForm="ngForm" (ngSubmit)="OnFormSubmitted(loginForm)" class="p-4 border rounded shadow">
       <h2 class="mb-4 text-center">Login Form</h2>
   
@@ -109,3 +110,4 @@
     </form>
     <p class="mt-5 text-left"><strong>{{ message() }}</strong></p>
 </div>
+<ng-content select="[footer]"></ng-content>
