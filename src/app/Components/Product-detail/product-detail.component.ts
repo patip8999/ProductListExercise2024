@@ -4,11 +4,12 @@ import { Productservice } from "../../Services/product.service";
 import { Observable } from "rxjs";
 import { ProductModel } from "../../Models/product.model";
 import { AsyncPipe } from "@angular/common";
+import { CardComponent } from "../../UI components/Card/card.component";
 
 @Component({
     templateUrl: './product-detail.component.html',
     standalone: true,
-    imports: [RouterModule, AsyncPipe]
+    imports: [RouterModule, AsyncPipe, CardComponent]
 })
 
 export class ProductDetailComponent {

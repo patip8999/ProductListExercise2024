@@ -41,7 +41,7 @@
     <div class="row row-cols-1 row-cols-md-6 g-5">
       @for (item of FilteredAndSortedProducts(); track item) {
         <div class="col">
-          <div class="card rounded shadow-sm" style="width: 18rem;">
+          <app-card>
             <div class="card-img-top" style="height: 150px;">
               <img
                 src="{{ item.image }}"
@@ -50,7 +50,6 @@
                 style="max-height: 100%; max-width: 100%; object-fit: contain;"
               />
             </div>
-
             <div class="card-body d-flex flex-column">
               <h5
                 class="card-title"
@@ -72,7 +71,6 @@
                 class="me-1 flex-fill"
                 data-bs-toggle="modal"
                 data-bs-target="#exampleModal"
-              
                 buttonType="outline"
                 [isLoading]="VisibleProductId() === item.id"
                 (buttonClick)="toggle2(item.id, item)"
@@ -88,13 +86,12 @@
                 (buttonClick)="toggle2(item.id, item)"
               ></app-button>
             </div>
-          </div>
+          </app-card>
         </div>
       }
     </div>
   </div>
 }
-
 
 
 <app-modal>

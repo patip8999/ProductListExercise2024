@@ -4,11 +4,12 @@ import { Productservice } from "../../Services/product.service";
 import { Observable, of } from "rxjs";
 import { ProductModel } from "../../Models/product.model";
 import { AsyncPipe, CommonModule } from "@angular/common";
+import { CardComponent } from "../../UI components/Card/card.component";
 
 @Component({
     templateUrl: './categories.component.html',
     standalone: true,
-    imports: [RouterModule, AsyncPipe, RouterOutlet, CommonModule]
+    imports: [RouterModule, AsyncPipe, RouterOutlet, CommonModule, CardComponent]
 })
 export class CategoriesComponent {
   public categoryName: string = ''; 

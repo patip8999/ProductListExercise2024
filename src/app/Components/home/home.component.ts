@@ -19,6 +19,7 @@ import { ModalComponent } from '../../UI components/Modal/modal.component';
 import { FilterPanelComponent } from '../../UI components/Filter-panel/filter-panel.component';
 import { ButtonComponent } from '../../UI components/Buttons/button.component';
 import { FooterComponent } from '../../UI components/Footer/footer.component';
+import { CardComponent } from '../../UI components/Card/card.component';
 
 @Component({
   templateUrl: './home.component.html',
@@ -31,6 +32,7 @@ import { FooterComponent } from '../../UI components/Footer/footer.component';
     ModalComponent,
     FilterPanelComponent,
     ButtonComponent,
+    CardComponent
   ],
 })
 export class HomeComponent {
