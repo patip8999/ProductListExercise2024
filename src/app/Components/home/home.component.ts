@@ -17,12 +17,16 @@ import { Observable } from 'rxjs';
 import { FooterComponent } from '../Footer/footer.component';
 import { ModalComponent } from '../../UI components/Modal/modal.component';
 
+
 @Component({
   templateUrl: './home.component.html',
   standalone: true,
   imports: [RouterModule, CommonModule, FormsModule, FooterComponent, ModalComponent],
 })
 export class HomeComponent {
+
+ 
+
   private readonly productService: Productservice = inject(Productservice); 
   public buttonColorr: string[] = ['#DDA0DD', '#DB7093', '#00BFFF', '#008B8B']; 
   public products: ProductModel[] = [];

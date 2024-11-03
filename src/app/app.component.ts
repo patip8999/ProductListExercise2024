@@ -1,10 +1,13 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, Signal } from '@angular/core';
 import { RouterModule, RouterOutlet } from '@angular/router';
 import { AsyncPipe, CommonModule } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { NavbarComponent } from "./Components/Navbar/navbar.component";
+
 import { FormsModule } from '@angular/forms';
+import { CategoriesService } from './Services/categories.service';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { NavbarComponent } from './UI components/Navbar/navbar.component';
 export interface CatFactModel {
   readonly fact: string;
 }
@@ -16,5 +19,7 @@ export interface CatFactModel {
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
-
+  private readonly categoriesService: CategoriesService = inject(CategoriesService); 
+  public categoriesSignal: Signal<string[]> = toSignal(this.categoriesService.getAll(), { initialValue: [] }); 
+  public buttonColorr: string[] = ['#DDA0DD', '#DB7093', '#00BFFF', '#008B8B']; 
 }
