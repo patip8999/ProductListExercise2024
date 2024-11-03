@@ -8,7 +8,7 @@ import { Component, Input } from "@angular/core";
     selector: 'app-footer'
 })
 export class FooterComponent {
-    @Input() linkUrl!: string; // Użyj `!` jeśli masz pewność, że będzie dostępne
+    @Input() linkUrl!: string; 
     @Input() linkText!: string; 
     @Input() companyName!: string; 
   

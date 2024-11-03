@@ -1,0 +1,20 @@
+<button
+  [ngClass]="{
+    'btn': true,
+    'btn-primary': buttonType === 'primary' && !isLoading,
+    'btn-outline-primary': buttonType === 'outline' && !isLoading,
+    'btn-success': buttonType === 'success' && !isLoading,
+    'btn-danger': buttonType === 'danger' && !isLoading,
+    'btn-secondary': buttonType === 'secondary' && !isLoading,
+    'btn-loading': isLoading
+  }"
+  (click)="handleClick()"
+  [disabled]="isLoading"
+>
+  @if (isLoading) {
+    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+    Loading...
+  } @else {
+    {{ label }}
+  }
+</button>

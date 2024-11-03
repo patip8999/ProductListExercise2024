@@ -14,35 +14,44 @@ import { Productservice } from '../../Services/product.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Observable } from 'rxjs';
-import { FooterComponent } from '../Footer/footer.component';
+
 import { ModalComponent } from '../../UI components/Modal/modal.component';
 import { FilterPanelComponent } from '../../UI components/Filter-panel/filter-panel.component';
-
+import { ButtonComponent } from '../../UI components/Buttons/button.component';
+import { FooterComponent } from '../../UI components/Footer/footer.component';
 
 @Component({
   templateUrl: './home.component.html',
   standalone: true,
-  imports: [RouterModule, CommonModule, FormsModule, FooterComponent, ModalComponent, FilterPanelComponent],
+  imports: [
+    RouterModule,
+    CommonModule,
+    FormsModule,
+    FooterComponent,
+    ModalComponent,
+    FilterPanelComponent,
+    ButtonComponent,
+  ],
 })
 export class HomeComponent {
-
- 
-
-  private readonly productService: Productservice = inject(Productservice); 
-  public buttonColorr: string[] = ['#DDA0DD', '#DB7093', '#00BFFF', '#008B8B']; 
+  private readonly productService: Productservice = inject(Productservice);
+  public buttonColorr: string[] = ['#DDA0DD', '#DB7093', '#00BFFF', '#008B8B'];
   public products: ProductModel[] = [];
 
-  // Używamy WritableSignal
-  public productsSignal: WritableSignal<ProductModel[]> = signal<ProductModel[]>([]); 
+  public productsSignal: WritableSignal<ProductModel[]> = signal<
+    ProductModel[]
+  >([]);
 
-  public isDetail: WritableSignal<boolean> = signal(false); 
+  public isDetail: WritableSignal<boolean> = signal(false);
   public VisibleProductId = signal<number | undefined>(undefined);
-  public isPriceVisible: WritableSignal<boolean> = signal(false); 
-  public sortOrder: WritableSignal<string> = signal('asc'); 
+  public isPriceVisible: WritableSignal<boolean> = signal(false);
+  public sortOrder: WritableSignal<string> = signal('asc');
   public filterText: WritableSignal<string> = signal('');
-  public isLoading: Signal<boolean> = computed(() => this.productsSignal() === null); 
+  public isLoading: Signal<boolean> = computed(
+    () => this.productsSignal() === null
+  );
 
-  public FilteredAndSortedProducts: Signal<ProductModel[]> = computed(() => { 
+  public FilteredAndSortedProducts: Signal<ProductModel[]> = computed(() => {
     const products = this.productsSignal();
     const filter = this.filterText().toLowerCase();
     const sortOrder = this.sortOrder();
@@ -58,9 +67,9 @@ export class HomeComponent {
     });
   });
 
-  public selectedProduct = signal<ProductModel | undefined>(undefined); 
+  public selectedProduct = signal<ProductModel | undefined>(undefined);
 
-  public toggle(): void { 
+  public toggle(): void {
     this.isPriceVisible.update((isVisible) => !isVisible);
   }
 
@@ -69,40 +78,40 @@ export class HomeComponent {
     this.selectedProduct.set(product);
   }
 
-  public sort(sortBy: 'asc' | 'desc'): void { 
+  public sort(sortBy: 'asc' | 'desc'): void {
     this.sortOrder.set(sortBy);
     console.log('Sort order set to:', sortBy);
     console.log('Current sort order:', this.sortOrder());
   }
-  
-  linkUrl: string = 'https://example.com'; 
-  linkText: string = 'Example Site'; 
-  companyName: string = 'Example Corp'; 
+
+  linkUrl: string = 'https://example.com';
+  linkText: string = 'Example Site';
+  companyName: string = 'Example Corp';
 
   constructor() {
-    // Inicjalizacja produktów przy użyciu metody `getAll`
-    this.productService.getAll().subscribe(products => {
-      this.productsSignal.set(products); // Ustawia początkową wartość sygnału
+   
+    this.productService.getAll().subscribe((products) => {
+      this.productsSignal.set(products); 
     });
   }
 
   public deleteProduct(productId: number | undefined) {
-    console.log("Usuwam produkt o ID:", productId);
-    
+    console.log('Usuwam produkt o ID:', productId);
+
     if (productId !== undefined) {
       this.productService.deleteProduct(productId.toString()).subscribe({
         next: () => {
-          const currentProducts = this.productsSignal(); // Uzyskanie aktualnej wartości sygnału
+          const currentProducts = this.productsSignal(); 
           const updatedProducts = currentProducts.filter(
             (product) => product.id !== productId
           );
 
-          // Ustawienie nowej wartości sygnału
-          this.productsSignal.set(updatedProducts); // Użycie metody `set`, aby ustawić nową wartość
+        
+          this.productsSignal.set(updatedProducts);
         },
         error: (err) => {
-          console.error("Błąd przy usuwaniu produktu:", err);
-        }
+          console.error('Błąd przy usuwaniu produktu:', err);
+        },
       });
     }
   }
