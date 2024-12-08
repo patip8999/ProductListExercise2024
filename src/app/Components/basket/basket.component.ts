@@ -23,4 +23,10 @@ export class BasketComponent {
     console.log(`${product.title} added to basket`);
     this.basketStore.dispatch(BasketActions.addProductToBasket({ product }));
   }
+
+  onRemoveButtonClicked(productId: number) {
+    console.log(`Product with ID ${productId} removed from basket`);
+    this.basketStore.dispatch(BasketActions.removeProductFromBasket({ productId }));
+  }
+
 }

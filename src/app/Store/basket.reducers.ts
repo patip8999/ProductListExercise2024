@@ -9,12 +9,22 @@ const initialState = storedBasket ? JSON.parse(storedBasket) : BasketState.INIT_
 export const BasketReducer = createReducer(
     initialState,  // Użyj stanu z localStorage (jeśli istnieje)
     on(BasketActions.addProductToBasket, (state, action) => {
-        const updatedState = {
+        console.log('current state before update', state);
+        return {
             ...state,
             products: [...state.products, action.product],
-            totalValueForClient: state.totalValueForClient + action.product.price
+            totaslValueForClient: state.totaslValueForClient + action.product.price
         };
-        localStorage.setItem('basket', JSON.stringify(updatedState));  // Zapisz stan koszyka
-        return updatedState;
+    }),
+    on(BasketActions.removeProductFromBasket, (state, action) => {
+        const updatedProducts = state.products.filter((product: { id: number; }) => product.id !== action.productId);
+        const removedProduct = state.products.find((product: { id: number; }) => product.id === action.productId);
+        const updatedTotalValue = state.totaslValueForClient - (removedProduct ? removedProduct.price : 0);
+
+        return {
+            ...state,
+            products: updatedProducts,
+            totaslValueForClient: updatedTotalValue
+        };
     })
 );

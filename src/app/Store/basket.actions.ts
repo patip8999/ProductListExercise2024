@@ -5,6 +5,6 @@ export const BasketActions = createActionGroup({
     source: 'Basket',
     events: {
         'Add product to basket': props<{product: ProductModel}>(),
-       
+        'Remove product from basket': props<{ productId: number }>()  
     }
 });
