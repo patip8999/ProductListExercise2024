@@ -8,6 +8,10 @@ import { FormsModule } from '@angular/forms';
 import { CategoriesService } from './Services/categories.service';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { NavbarComponent } from './UI components/Navbar/navbar.component';
+import { Store } from '@ngrx/store';
+import { BasketState } from './Store/basket.state';
+import { ProductModel } from './Models/product.model';
+import { BasketActions } from './Store/basket.actions';
 export interface CatFactModel {
   readonly fact: string;
 }
@@ -22,4 +26,12 @@ export class AppComponent {
   private readonly categoriesService: CategoriesService = inject(CategoriesService); 
   public categoriesSignal: Signal<string[]> = toSignal(this.categoriesService.getAll(), { initialValue: [] }); 
   public buttonColorr: string[] = ['#DDA0DD', '#DB7093', '#00BFFF', '#008B8B']; 
+  readonly basketStore = inject(Store);
+  readonly products$ = this.basketStore.select(BasketState.selectProducts);  
+
+
+  onAddButtonClicked(product: ProductModel) {
+    this.basketStore.dispatch(BasketActions.addProductToBasket({ product }));
+  }
+
 }

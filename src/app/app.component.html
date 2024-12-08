@@ -2,21 +2,30 @@
 <app-navbar>
   
   
-    <ng-container category-buttons>
-      @for (category of categoriesSignal(); track category; let i = $index) {
-        <button
-          type="button"
-          class="btn rounded-pill"
-          style="background-color: {{ buttonColorr[i] }}; color: white; margin-right: 10px; transition: background-color 0.3s;">
-          <div [routerLink]="['/category', category]">{{ category }}</div>
-        </button>
+  <ng-container category-buttons>
+    @for (category of categoriesSignal(); track category; let i = $index) {
+      <button
+        type="button"
+        class="btn rounded-pill"
+        style="background-color: {{ buttonColorr[i] }}; color: white; margin-right: 10px; transition: background-color 0.3s;">
+        <div [routerLink]="['/category', category]">{{ category }}</div>
+      </button>
+    }
+  </ng-container>
+
+  <ng-container form>
+    <button class="btn btn-primary" [routerLink]="['basket']">
+      Basket
+      @if (products$ | async; as product?.length > 0) {
+        <span class="badge bg-secondary">
+          {{ (products$ | async)?.length }}
+        </span>
       }
-    </ng-container>
-  
-    <ng-container form>
-      <button class="btn btn-outline-info" type="submit" [routerLink]="['basket']">Basket</button>
-      <button class="btn btn-outline-info" type="submit" [routerLink]="['form']">Register</button>
-    </ng-container>
-  </app-navbar>
-  
+    </button>
+    
+
+    <button class="btn btn-outline-info" type="submit" [routerLink]="['form']">Register</button>
+  </ng-container>
+</app-navbar>
+
 <router-outlet></router-outlet>

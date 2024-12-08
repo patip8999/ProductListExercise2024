@@ -1,0 +1,16 @@
+button {
+    position: relative;
+  }
+  
+  button .badge {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    font-size: 1rem;
+    padding: 5px 10px;
+  }
+  ng-container form {
+    display: flex;
+    gap: 10px;  /* Użyj gap do rozdzielenia przycisków */
+    align-items: center;  /* Wyrównanie przycisków */
+  }
