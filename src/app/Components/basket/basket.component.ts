@@ -19,14 +19,15 @@ export class BasketComponent {
   readonly products$ = this.basketStore.select(BasketState.selectProducts);
   readonly totalValue$ = this.basketStore.select(BasketState.selectTotalValueForClient);
 
+  // Funkcja do dodania produktu do koszyka
   onAddButtonCliced(product: ProductModel) {
     console.log(`${product.title} added to basket`);
     this.basketStore.dispatch(BasketActions.addProductToBasket({ product }));
   }
 
+  // Funkcja do usunięcia produktu z koszyka
   onRemoveButtonClicked(productId: number) {
     console.log(`Product with ID ${productId} removed from basket`);
     this.basketStore.dispatch(BasketActions.removeProductFromBasket({ productId }));
   }
-
 }

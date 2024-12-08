@@ -1,30 +1,38 @@
 import { createReducer, on } from "@ngrx/store";
-import { BasketState } from "./basket.state";
 import { BasketActions } from "./basket.actions";
+import { BasketState } from "./basket.state";
 
-
+// Odczytujemy stan z localStorage, jeśli istnieje, lub ustawiamy początkowy stan
 const storedBasket = localStorage.getItem('basket');
-const initialState = storedBasket ? JSON.parse(storedBasket) : BasketState.INIT_STATE;
+const initialState: BasketState = storedBasket ? JSON.parse(storedBasket) : {
+    products: [],
+    totalValueForClient: 0
+};
 
 export const BasketReducer = createReducer(
-    initialState,  // Użyj stanu z localStorage (jeśli istnieje)
+    initialState,  
     on(BasketActions.addProductToBasket, (state, action) => {
-        console.log('current state before update', state);
-        return {
+        const updatedState = {
             ...state,
             products: [...state.products, action.product],
-            totaslValueForClient: state.totaslValueForClient + action.product.price
+            totalValueForClient: state.totalValueForClient + action.product.price
         };
+        // Zapisujemy stan do localStorage po każdej zmianie
+        localStorage.setItem('basket', JSON.stringify(updatedState));
+        return updatedState;
     }),
     on(BasketActions.removeProductFromBasket, (state, action) => {
-        const updatedProducts = state.products.filter((product: { id: number; }) => product.id !== action.productId);
-        const removedProduct = state.products.find((product: { id: number; }) => product.id === action.productId);
-        const updatedTotalValue = state.totaslValueForClient - (removedProduct ? removedProduct.price : 0);
+        const updatedProducts = state.products.filter(product => product.id !== action.productId);
+        const removedProduct = state.products.find(product => product.id === action.productId);
+        const updatedTotalValue = removedProduct ? state.totalValueForClient - removedProduct.price : state.totalValueForClient;
 
-        return {
+        const updatedState = {
             ...state,
             products: updatedProducts,
-            totaslValueForClient: updatedTotalValue
+            totalValueForClient: updatedTotalValue
         };
+        // Zapisujemy stan do localStorage po każdej zmianie
+        localStorage.setItem('basket', JSON.stringify(updatedState));
+        return updatedState;
     })
 );
