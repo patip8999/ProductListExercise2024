@@ -2,7 +2,7 @@ import { createReducer, on } from "@ngrx/store";
 import { BasketActions } from "./basket.actions";
 import { BasketState } from "./basket.state";
 
-// Odczytujemy stan z localStorage, jeśli istnieje, lub ustawiamy początkowy stan
+
 const storedBasket = localStorage.getItem('basket');
 const initialState: BasketState = storedBasket ? JSON.parse(storedBasket) : {
     products: [],
@@ -17,7 +17,7 @@ export const BasketReducer = createReducer(
             products: [...state.products, action.product],
             totalValueForClient: state.totalValueForClient + action.product.price
         };
-        // Zapisujemy stan do localStorage po każdej zmianie
+     
         localStorage.setItem('basket', JSON.stringify(updatedState));
         return updatedState;
     }),
@@ -31,7 +31,7 @@ export const BasketReducer = createReducer(
             products: updatedProducts,
             totalValueForClient: updatedTotalValue
         };
-        // Zapisujemy stan do localStorage po każdej zmianie
+   
         localStorage.setItem('basket', JSON.stringify(updatedState));
         return updatedState;
     })

@@ -3,19 +3,19 @@ import { ProductModel } from "../Models/product.model";
 
 export interface BasketState {
     readonly products: ProductModel[];
-    readonly totalValueForClient: number;  // Poprawiona nazwa
+    readonly totalValueForClient: number; 
 }
 
 export namespace BasketState {
     export const INIT_STATE: BasketState = {
         products: [],
-        totalValueForClient: 0  // Poprawiona nazwa
+        totalValueForClient: 0  
     };
 
     export const selectBasketState = createFeatureSelector<BasketState>('basket');
     export const selectProducts = createSelector(selectBasketState, (state: BasketState) => state.products);
     export const selectTotalValueForClient = createSelector(
         selectBasketState,
-        (state: BasketState) => state.totalValueForClient // Poprawiona nazwa
+        (state: BasketState) => state.totalValueForClient 
     );
 }
