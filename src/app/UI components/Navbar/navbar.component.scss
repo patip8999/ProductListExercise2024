@@ -1,25 +1,40 @@
 
 .navbar .navbar-collapse .d-flex {
-    display: flex;
-    justify-content: flex-end;
-  }
-  
-  .navbar .btn-group {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px; 
-  
-  .navbar .d-flex.ms-auto {
-    display: flex;
-    gap: 10px; 
-  }
-  
-  .navbar .navbar-nav {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-  }
-  
-  .navbar-nav .nav-item {
-    margin: 0 5px;  
-  
+  display: flex;
+  justify-content: flex-end;
+}
+
+.navbar .btn-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px; 
+}
+.navbar .d-flex.ms-auto {
+  display: flex;
+  gap: 10px; 
+}
+
+.navbar .navbar-nav {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.navbar-nav .nav-item {
+  margin: 0 5px;  
+}
+.navbar .btn {
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.navbar .btn:hover {
+  background-color: #0056b3; /* Zmieniony kolor przy hover */
+  transform: scale(1.1); /* Powiększenie przycisku */
+}
+
+.navbar {
+  background-image: linear-gradient(90deg, #a7c7e7, #d1e2e9); /* Pastelowy błękit i stonowany szary */
+  background-size: cover; /* Pełne pokrycie tła */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Dodanie lekkiego cienia */
+  padding: 10px 0; /* Ustalamy odpowiednią przestrzeń w navbarze */
+}

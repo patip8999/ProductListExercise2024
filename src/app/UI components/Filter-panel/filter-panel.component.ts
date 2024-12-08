@@ -4,7 +4,8 @@ import { Component } from "@angular/core";
     templateUrl: './filter-panel.component.html',
     standalone: true,
     imports: [],
-    selector: 'app-filter-panel'
+    selector: 'app-filter-panel',
+    styleUrl: './filter-panel.component.scss',
 })
 
 export class FilterPanelComponent {

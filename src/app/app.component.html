@@ -15,14 +15,9 @@
 
   <ng-container form>
     <button class="btn btn-primary" [routerLink]="['basket']">
-      Basket
-      @if (products$ | async; as product?.length > 0) {
-        <span class="badge bg-secondary">
-          {{ (products$ | async)?.length }}
-        </span>
-      }
+      <i class="fas fa-shopping-cart"></i> Basket
+      <span class="badge bg-secondary">{{ (products$ | async)?.length }}</span>
     </button>
-    
 
     <button class="btn btn-outline-info" type="submit" [routerLink]="['form']">Register</button>
   </ng-container>
