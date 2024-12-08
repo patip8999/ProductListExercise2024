@@ -26,6 +26,7 @@ import { BasketActions } from '../../Store/basket.actions';
 @Component({
   templateUrl: './home.component.html',
   standalone: true,
+  styleUrl: './home.component.scss',
   imports: [
     RouterModule,
     CommonModule,

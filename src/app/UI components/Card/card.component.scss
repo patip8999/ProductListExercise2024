@@ -1,0 +1,42 @@
+.card {
+    width: 18rem;
+    border-radius: 10px; /* Zaokrąglenie rogów */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Delikatny cień */
+    transition: transform 0.2s ease-in-out, box-shadow 0.3s ease; /* Płynne przejścia */
+    overflow: hidden; /* Ukrycie nadmiarowych elementów, np. zaokrąglone rogi */
+    background: #ffffff; /* Białe tło karty */
+    border: 1px solid #e0e0e0; /* Lekka ramka */
+  }
+  
+  .card:hover {
+    transform: translateY(-5px); /* Efekt unoszenia się karty przy hover */
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2); /* Zwiększony cień przy hover */
+  }
+  
+  .card .card-body {
+    padding: 1rem; /* Dobre wyśrodkowanie treści */
+  }
+  
+  .card img {
+    width: 100%;
+    height: auto; /* Dopasowanie obrazka do szerokości karty */
+  }
+  
+  .card-title {
+    font-size: 1.25rem; /* Większy rozmiar tytułu */
+    font-weight: 600; /* Pogrubiony tytuł */
+    color: #333; /* Ciemniejszy kolor tytułu */
+  }
+  
+  .card-text {
+    font-size: 1rem;
+    color: #555; /* Jasny kolor tekstu */
+  }
+  
+  .card-footer {
+    background-color: #f8f9fa; /* Jasne tło stopki */
+    text-align: center;
+    padding: 0.5rem 0;
+    font-size: 0.875rem;
+  }
+  
