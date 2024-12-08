@@ -20,6 +20,8 @@ import { FilterPanelComponent } from '../../UI components/Filter-panel/filter-pa
 import { ButtonComponent } from '../../UI components/Buttons/button.component';
 import { FooterComponent } from '../../UI components/Footer/footer.component';
 import { CardComponent } from '../../UI components/Card/card.component';
+import { Store } from '@ngrx/store';
+import { BasketActions } from '../../Store/basket.actions';
 
 @Component({
   templateUrl: './home.component.html',
@@ -39,6 +41,7 @@ export class HomeComponent {
   private readonly productService: Productservice = inject(Productservice);
   public buttonColorr: string[] = ['#DDA0DD', '#DB7093', '#00BFFF', '#008B8B'];
   public products: ProductModel[] = [];
+  private readonly basketStore: Store = inject(Store)
 
   public productsSignal: WritableSignal<ProductModel[]> = signal<
     ProductModel[]
@@ -116,5 +119,9 @@ export class HomeComponent {
         },
       });
     }
+  }
+  onAddButtonCliced(product: ProductModel) {
+    console.log(`${product.title} added`);
+    this.basketStore.dispatch(BasketActions.addProductToBasket({ product }));
   }
 }

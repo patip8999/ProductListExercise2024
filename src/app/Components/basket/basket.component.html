@@ -1,0 +1,19 @@
+<p>Basket works!</p>
+
+@if (products$ | async) {
+  <ul>
+    @for (product of products$ | async; track product) {
+      <li>
+        <h5>{{ product.title }}</h5>
+        <p>Price: ${{ product.price }}</p>
+      </li>
+      <app-button
+        label="Buy now!"
+        buttonType="success"
+        (buttonClick)="onAddButtonCliced(product)">
+      </app-button>
+    }
+  </ul>
+}
+
+<p>Total: ${{ totalValue$ | async }}</p>
