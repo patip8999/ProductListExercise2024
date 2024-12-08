@@ -10,19 +10,19 @@
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" [routerLink]="['']">Home</a>
         </li>
-        <ng-content select="[nav-links]"></ng-content> <!-- Miejsce na dodatkowe linki -->
+        <ng-content select="[nav-links]"></ng-content> 
       </ul>
 
-      <!-- Kontener przycisków kategorii -->
+    
       <div class="d-flex justify-content-center w-100 mb-2">
         <div class="btn-group">
-          <ng-content select="[category-buttons]"></ng-content> <!-- Miejsce na przyciski kategorii -->
+          <ng-content select="[category-buttons]"></ng-content> 
         </div>
       </div>
 
-      <!-- Formularz z przyciskami (koszyk, rejestracja) -->
+      
       <form class="d-flex ms-auto gap-3" role="form">
-        <ng-content select="[form]"></ng-content> <!-- Miejsce na formularz lub przyciski -->
+        <ng-content select="[form]"></ng-content> 
       </form>
     </div>
   </div>

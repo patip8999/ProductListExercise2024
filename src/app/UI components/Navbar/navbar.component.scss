@@ -1,4 +1,4 @@
-/* Globalne style dla kontenera z przyciskami w nawigacji */
+
 .navbar .navbar-collapse .d-flex {
     display: flex;
     justify-content: flex-end;
@@ -6,13 +6,12 @@
   
   .navbar .btn-group {
     display: flex;
-    flex-wrap: wrap; /* Pozwala przyciskom przechodzić do nowej linii, gdy brak miejsca */
-    gap: 10px; /* Odstęp między przyciskami */
-  }
+    flex-wrap: wrap;
+    gap: 10px; 
   
   .navbar .d-flex.ms-auto {
     display: flex;
-    gap: 10px;  /* Ustawienie odstępu między przyciskami w formularzu */
+    gap: 10px; 
   }
   
   .navbar .navbar-nav {
@@ -22,6 +21,5 @@
   }
   
   .navbar-nav .nav-item {
-    margin: 0 5px;  /* Odstęp między elementami nawigacyjnymi */
-  }
+    margin: 0 5px;  
   
